@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Portfolio - Omar Bouaaliouat
 
 ## À propos
@@ -49,3 +50,6 @@
 ## 🚀 Live Demo
 
 [https://omar-bouaaliouat.github.io/portfolio-omar/](https://omar-bouaaliouat.github.io/portfolio-omar/)
+=======
+# Omar-BOUAALIOUAT-Portfolio
+>>>>>>> 7bd459e432781879b3936959160f9ced25b92d5e
