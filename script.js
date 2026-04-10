@@ -557,3 +557,57 @@ function createModal() {
 document.addEventListener('DOMContentLoaded', function() {
     createModal();
 });
+// ============================================
+// MENU BURGER POUR MOBILE
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBurger = document.getElementById('menuBurger');
+    const mainNav = document.getElementById('mainNav');
+    const body = document.body;
+    
+    if (menuBurger && mainNav) {
+        // Ouvrir/fermer le menu au clic sur le burger
+        menuBurger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menuBurger.classList.toggle('active');
+            mainNav.classList.toggle('open');
+            body.classList.toggle('menu-open');
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        const navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menuBurger.classList.remove('active');
+                mainNav.classList.remove('open');
+                body.classList.remove('menu-open');
+            });
+        });
+        
+        // Fermer le menu quand on clique en dehors
+        document.addEventListener('click', function(event) {
+            if (mainNav.classList.contains('open') && 
+                !mainNav.contains(event.target) && 
+                !menuBurger.contains(event.target)) {
+                menuBurger.classList.remove('active');
+                mainNav.classList.remove('open');
+                body.classList.remove('menu-open');
+            }
+        });
+    }
+});
+
+// Ajuster le padding-top du container selon la hauteur du header
+function adjustContainerPadding() {
+    const header = document.querySelector('header');
+    const container = document.querySelector('.container');
+    if (header && container) {
+        const headerHeight = header.offsetHeight;
+        container.style.paddingTop = (headerHeight + 20) + 'px';
+    }
+}
+
+// Exécuter au chargement et au redimensionnement
+window.addEventListener('load', adjustContainerPadding);
+window.addEventListener('resize', adjustContainerPadding);
