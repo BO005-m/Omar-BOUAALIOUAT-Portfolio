@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Portfolio - Omar Bouaaliouat
 
 ## À propos
@@ -53,3 +54,6 @@
 =======
 # Omar-BOUAALIOUAT-Portfolio
 >>>>>>> 7bd459e432781879b3936959160f9ced25b92d5e
+=======
+# Omar-BOUAALIOUAT-Portfolio
+>>>>>>> 83b098bf25cbbc9a5804c851e98963062fe3b5ea
