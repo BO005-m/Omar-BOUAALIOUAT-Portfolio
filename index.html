@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Omar Bouaaliouat - Étudiant en Science des Données, Big Data et Intelligence Artificielle à l'ENSA Agadir">
+    <meta name="keywords" content="Data Science, Big Data, Intelligence Artificielle, Machine Learning, Portfolio">
+    <meta name="author" content="Omar Bouaaliouat">
+    <meta property="og:title" content="Portfolio - Omar Bouaaliouat">
+    <meta property="og:description" content="Étudiant passionné par la Data Science et l'IA à l'ENSA Agadir">
+    <meta property="og:type" content="website">
+    <title>Portfolio - Omar Bouaaliouat</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Notification de succès -->
+    <div id="successNotification" class="success-notification" role="alert" aria-live="polite">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-text">Message envoyé avec succès !</span>
+        </div>
+        <button class="notification-close" onclick="closeNotification()" aria-label="Fermer la notification">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Notification d'erreur -->
+    <div id="errorNotification" class="error-notification" role="alert" aria-live="polite">
+        <div class="notification-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="error-text">Erreur lors de l'envoi du message.</span>
+        </div>
+        <button class="notification-close" onclick="closeErrorNotification()" aria-label="Fermer la notification">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Arrière-plan animé -->
+    <div class="animated-bg"></div>
+    <div class="particles" id="particles" aria-hidden="true"></div>
+
+    <!-- En-tête avec navigation -->
+    <header role="banner">
+        <div style="display: flex; align-items: center; gap: 2rem;">
+            <div class="logo">
+                <div class="logo-flip-container" onclick="flipLogo()" role="button" tabindex="0" aria-label="Logo">
+                    <div class="logo-flip" id="logoFlip">
+                        <div class="logo-box logo-front">
+                            <img src="logo-sans-back.png" alt="Logo" class="logo-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="lang-btn" onclick="toggleLanguage()" aria-label="Changer de langue">
+                <i class="fas fa-globe" aria-hidden="true"></i> <span id="lang-text">EN</span>
+            </button>
+        </div>
+        <nav role="navigation" aria-label="Navigation principale">
+            <ul>
+                <li><a href="#home" id="nav-home">Accueil</a></li>
+                <li><a href="#about" id="nav-about">À propos</a></li>
+                <li><a href="#experience" id="nav-exp">Expérience</a></li>
+                <li><a href="#projects" id="nav-projects">Projets</a></li>
+                <li><a href="#skills" id="nav-skills">Compétences</a></li>
+                <li><a href="#certificates" id="nav-certificates">Certificats</a></li>
+                <li><a href="#contact" id="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Section Hero -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="profile-img-container">
+                    <img src="face.jpg" alt="Photo de profil de Omar Bouaaliouat" class="profile-img" id="profileImg" onclick="changeProfileImage()" role="button" tabindex="0">
+                </div>
+                <h1>BOUAALIOUAT Omar</h1>
+                <p id="subtitle">Science des Données, Big Data et Intelligence Artificielle @ ENSA Agadir</p>
+                <div class="social-links" role="group" aria-label="Liens réseaux sociaux">
+                    <a href="https://www.linkedin.com/in/omar-bouaaliouat-89a87a299" target="_blank" rel="noopener noreferrer" class="social-btn linkedin" aria-label="Profil LinkedIn">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/search?q=OB005-m&type=Users" target="_blank" rel="noopener noreferrer" class="social-btn github" aria-label="Profil GitHub">
+                        <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                    </a>
+                    <button class="social-btn cv" onclick="window.open('Omar_BOUAALIOUAT_CV.pdf', '_blank')" aria-label="Télécharger le CV en PDF">
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i> CV PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section À propos -->
+        <section id="about">
+            <h2><i class="fas fa-user" aria-hidden="true"></i> <span id="about-title">À Propos de Moi</span></h2>
+            <p id="about-text">
+                Passionné par la science des données et l'intelligence artificielle, je suis étudiant à l'ENSA Agadir où je développe mes compétences en analyse de données, machine learning et big data. Mon objectif est de transformer les données en insights précieux et de créer des solutions innovantes qui ont un impact réel.
+            </p>
+        </section>
+
+        <!-- Section Formation -->
+        <section id="education">
+            <h2><i class="fas fa-graduation-cap" aria-hidden="true"></i> <span id="edu-title">Formation Académique</span></h2>
+            <div class="education-item">
+                <div class="item-icon" aria-hidden="true"><i class="fas fa-university"></i></div>
+                <div class="item-content">
+                    <h3>ENSA Agadir</h3>
+                    <p><strong id="degree">Cycle d'Ingénieur</strong> - Science des Données, Big Data et Intelligence Artificielle</p>
+                    <p class="date"><i class="far fa-calendar" aria-hidden="true"></i> 2023 - Présent</p>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="item-icon" aria-hidden="true"><i class="fas fa-school"></i></div>
+                <div class="item-content">
+                    <h3 id="high-school">Baccalauréat</h3>
+                    <p id="high-desc">Sciences Physiques - Option Français</p>
+                    <p class="date"><i class="far fa-calendar" aria-hidden="true"></i> 2023</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Expérience -->
+        <section id="experience">
+            <h2><i class="fas fa-briefcase" aria-hidden="true"></i> <span id="exp-title">Expérience</span></h2>
+            <div class="experience-item">
+                <div class="item-icon" aria-hidden="true"><i class="fas fa-building"></i></div>
+                <div class="item-content">
+                    <h3 id="exp0-title">INJAZ AL MAGHRIB - Company Program</h3>
+                    <p id="exp0-desc">Participation au programme entrepreneurial "Company Program" d'INJAZ AL MAGHRIB, développant des compétences en gestion d'entreprise, travail d'équipe et innovation.</p>
+                    <p class="date"><i class="far fa-calendar" aria-hidden="true"></i> <span id="exp0-date">2024</span></p>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="item-icon" aria-hidden="true"><i class="fas fa-laptop-code"></i></div>
+                <div class="item-content">
+                    <h3 id="exp1-title">Projets Académiques</h3>
+                    <p id="exp1-desc">Développement de projets en data science, analyse de données et machine learning dans le cadre de ma formation à l'ENSA Agadir.</p>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="item-icon" aria-hidden="true"><i class="fas fa-book-reader"></i></div>
+                <div class="item-content">
+                    <h3 id="exp2-title">Apprentissage Continu</h3>
+                    <p id="exp2-desc">Formation autonome en programmation, développement web et technologies émergentes pour renforcer mes compétences techniques.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Projets -->
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram" aria-hidden="true"></i> <span id="projects-title">Projets</span></h2>
+            
+            <div class="project-item">
+                <div class="item-icon" aria-hidden="true"><i class="fab fa-r-project"></i></div>
+                <div class="item-content">
+                    <h3 id="project1-title">Analyse statistique avec R</h3>
+                    <ul class="project-list">
+                        <li>Importation et traitement de bases de données</li>
+                        <li>Visualisation des données : Conception des graphes avancés (Histogrammes, Nuages de points, Boxplots)</li>
+                        <li>Interprétation et reporting : Synthèses des résultats sous forme des indicateurs clés pour faciliter la prise de décision</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="item-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
+                <div class="item-content">
+                    <h3 id="project2-title">Étude de la relation entre la disposition des produits et les performances des ventes</h3>
+                    <ul class="project-list">
+                        <li>Traitement de Données : Nettoyage et manipulation de bases de données transactionnelles avec Python (Pandas)</li>
+                        <li>Analyse Statistique : Calcul des corrélations et analyse des tendances de vente par catégorie de produits avec R (tidyverse)</li>
+                        <li>Visualisation : Conception de graphiques avancés et de cartes de chaleur (Heatmaps) avec Matplotlib pour faciliter la prise de décision</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Compétences -->
+        <section id="skills">
+            <h2><i class="fas fa-code" aria-hidden="true"></i> <span id="skills-title">Compétences</span></h2>
+            
+            <!-- Langages de programmation -->
+            <div class="skills-category">
+                <h3 class="category-title"><i class="fas fa-code"></i> <span id="skills-lang-title">Langages de programmation</span></h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fas fa-copyright"></i></div>
+                        <h3>C</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-python"></i></div>
+                        <h3>Python</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-java"></i></div>
+                        <h3>Java</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 60%"></div></div>
+                        <span class="skill-percentage">60%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-r-project"></i></div>
+                        <h3>R</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                        <span class="skill-percentage">80%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fas fa-calculator"></i></div>
+                        <h3>MATLAB</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                        <span class="skill-percentage">75%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Science & Analyse -->
+            <div class="skills-category">
+                <h3 class="category-title"><i class="fas fa-chart-line"></i> <span id="skills-ds-title">Data Science & Analyse</span></h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-python"></i></div>
+                        <h3>Pandas</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-python"></i></div>
+                        <h3>NumPy</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                        <span class="skill-percentage">80%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
+                        <h3>Matplotlib</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fas fa-database"></i></div>
+                        <h3>SQL</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                        <span class="skill-percentage">75%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Développement Web & Outils -->
+            <div class="skills-category">
+                <h3 class="category-title"><i class="fas fa-laptop-code"></i> <span id="skills-web-title">Développement Web & Outils</span></h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-html5"></i></div>
+                        <h3>HTML</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-css3-alt"></i></div>
+                        <h3>CSS</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                        <span class="skill-percentage">80%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-git-alt"></i></div>
+                        <h3>Git</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%"></div></div>
+                        <span class="skill-percentage">75%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fab fa-github"></i></div>
+                        <h3>GitHub</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                        <span class="skill-percentage">80%</span>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-icon" aria-hidden="true"><i class="fas fa-microchip"></i></div>
+                        <h3>Arduino</h3>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 60%"></div></div>
+                        <span class="skill-percentage">60%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Certificats -->
+        <section id="certificates">
+            <h2><i class="fas fa-certificate" aria-hidden="true"></i> <span id="certificates-title">Certificats Obtenus</span></h2>
+            <div class="certificates-grid">
+                <div class="certificate-item">
+                    <div class="certificate-icon"><i class="fab fa-python"></i></div>
+                    <div class="certificate-content">
+                        <h3>Python</h3>
+                        <p class="certificate-issuer">Kaggle</p>
+                        <p class="certificate-date">2026</p>
+                        <div class="certificate-badge">
+                            <i class="fas fa-check-circle"></i> <span class="cert-badge-text">Certifié</span>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="certificate-btn view-cert" onclick="viewCertificate('certificats/python-cert.pdf')">
+                                <i class="fas fa-eye"></i> Voir
+                            </button>
+                            <button class="certificate-btn download-cert" onclick="downloadCertificate('certificats/python-cert.pdf')">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-item">
+                    <div class="certificate-icon"><i class="fab fa-r-project"></i></div>
+                    <div class="certificate-content">
+                        <h3>R</h3>
+                        <p class="certificate-issuer">Kaggle</p>
+                        <p class="certificate-date">2026</p>
+                        <div class="certificate-badge">
+                            <i class="fas fa-check-circle"></i> <span class="cert-badge-text">Certifié</span>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="certificate-btn view-cert" onclick="viewCertificate('certificats/r-cert.pdf')">
+                                <i class="fas fa-eye"></i> Voir
+                            </button>
+                            <button class="certificate-btn download-cert" onclick="downloadCertificate('certificats/r-cert.pdf')">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-item">
+                    <div class="certificate-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="certificate-content">
+                        <h3>Matplotlib</h3>
+                        <p class="certificate-issuer">Kaggle</p>
+                        <p class="certificate-date">2026</p>
+                        <div class="certificate-badge">
+                            <i class="fas fa-check-circle"></i> <span class="cert-badge-text">Certifié</span>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="certificate-btn view-cert" onclick="viewCertificate('certificats/matplotlib-cert.pdf')">
+                                <i class="fas fa-eye"></i> Voir
+                            </button>
+                            <button class="certificate-btn download-cert" onclick="downloadCertificate('certificats/matplotlib-cert.pdf')">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificate-item">
+                    <div class="certificate-icon"><i class="fas fa-building"></i></div>
+                    <div class="certificate-content">
+                        <h3>INJAZ AL MAGHRIB - Company Program</h3>
+                        <p class="certificate-issuer">INJAZ AL MAGHRIB</p>
+                        <p class="certificate-date">2024</p>
+                        <div class="certificate-badge">
+                            <i class="fas fa-check-circle"></i> <span class="cert-badge-text">Certifié</span>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="certificate-btn view-cert" onclick="viewCertificate('certificats/injaz-cert.pdf')">
+                                <i class="fas fa-eye"></i> Voir
+                            </button>
+                            <button class="certificate-btn download-cert" onclick="downloadCertificate('certificats/injaz-cert.pdf')">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-item">
+                    <div class="certificate-icon"><i class="fas fa-microchip"></i></div>
+                    <div class="certificate-content">
+                        <h3>Arduino Programming & Electronics</h3>
+                        <p class="certificate-issuer">Arduino Education</p>
+                        <p class="certificate-date">2024</p>
+                        <div class="certificate-badge">
+                            <i class="fas fa-check-circle"></i> <span class="cert-badge-text">Certifié</span>
+                        </div>
+                        <div class="certificate-actions">
+                            <button class="certificate-btn view-cert" onclick="viewCertificate('certificats/arduino-cert.pdf')">
+                                <i class="fas fa-eye"></i> Voir
+                            </button>
+                            <button class="certificate-btn download-cert" onclick="downloadCertificate('certificats/arduino-cert.pdf')">
+                                <i class="fas fa-download"></i> Télécharger
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact">
+            <h2><i class="fas fa-envelope" aria-hidden="true"></i> <span id="contact-title">Contactez-moi</span></h2>
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/mpqodkjd" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" id="label-name"><i class="fas fa-user"></i> Nom</label>
+                        <input type="text" id="name" name="name" required placeholder="Votre nom complet">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" id="label-email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message" id="label-message"><i class="fas fa-comment"></i> Message</label>
+                    <textarea id="message" name="message" required placeholder="Votre message..."></textarea>
+                </div>
+                <button type="submit" class="send-btn" id="send-btn">
+                    <i class="fas fa-paper-plane"></i> <span id="btn-text">Envoyer</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Pied de page -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p><i class="fas fa-envelope"></i> omarbouaaliouat2005@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> <span id="phone-label">Téléphone :</span> +212 706 214 471</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/omar-bouaaliouat-89a87a299" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/search?q=OB005-m&type=Users" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:omarbouaaliouat2005@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <p class="copyright">Copyright © 2025 <span id="rights">Tous droits réservés</span> | Omar Bouaaliouat</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

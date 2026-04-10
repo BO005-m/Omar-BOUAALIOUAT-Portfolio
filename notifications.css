@@ -1,0 +1,140 @@
+/* ============================================
+   STYLES POUR LES NOTIFICATIONS
+   ============================================ */
+
+/* Notification de succès */
+.success-notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    z-index: 9999;
+    min-width: 320px;
+    max-width: 90%;
+    transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.success-notification.show {
+    top: 20px;
+}
+
+/* Notification d'erreur */
+.error-notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    z-index: 9999;
+    min-width: 320px;
+    max-width: 90%;
+    transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.error-notification.show {
+    top: 20px;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.notification-content i {
+    font-size: 1.5rem;
+    animation: checkPulse 0.6s ease-in-out;
+}
+
+@keyframes checkPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.notification-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.notification-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Animation de chargement sur le bouton */
+#btn-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.send-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.send-btn:disabled:hover {
+    transform: none;
+}
+
+/* Responsive pour les notifications */
+@media (max-width: 768px) {
+    .success-notification,
+    .error-notification {
+        min-width: 280px;
+        padding: 0.875rem 1.5rem;
+    }
+    
+    .notification-content {
+        font-size: 0.9rem;
+    }
+    
+    .notification-content i {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .success-notification,
+    .error-notification {
+        min-width: 90%;
+        padding: 0.75rem 1rem;
+    }
+    
+    .notification-content {
+        font-size: 0.85rem;
+    }
+}
