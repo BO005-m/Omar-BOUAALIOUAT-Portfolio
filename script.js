@@ -31,51 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
     createParticles();
     initScrollAnimations();
     initNavHighlight();
+    createModal();
+    initMobileMenu();
+    adjustContainerPadding();
 });
 
-// Logo flip animation avec support clavier
+// Logo flip animation
 function flipLogo() {
     const logoFlip = document.getElementById('logoFlip');
     logoFlip.classList.toggle('flipped');
 }
 
-// Ajout du support clavier pour le logo
-document.querySelector('.logo-flip-container')?.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        flipLogo();
-    }
-});
-
-// Profile image rotation and change avec support clavier
-const profileImages = [
-    'face.jpg',
-    'logo-sans-back.png',
-];
-
+// Profile image rotation
+const profileImages = ['face.jpg', 'logo-sans-back.png'];
 let currentImageIndex = 0;
 
 function changeProfileImage() {
     const imgElement = document.getElementById('profileImg');
-    
     imgElement.classList.add('rotating');
-    
     setTimeout(() => {
         currentImageIndex = (currentImageIndex + 1) % profileImages.length;
         imgElement.src = profileImages[currentImageIndex];
     }, 400);
-    
-    setTimeout(() => {
-        imgElement.classList.remove('rotating');
-    }, 800);
+    setTimeout(() => imgElement.classList.remove('rotating'), 800);
 }
-
-document.getElementById('profileImg')?.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        changeProfileImage();
-    }
-});
 
 // Système de traduction
 let currentLang = 'fr';
@@ -109,6 +88,9 @@ const translations = {
         'project1-title': 'Analyse statistique avec R',
         'project2-title': 'Étude de la relation entre la disposition des produits et les performances des ventes',
         'skills-title': 'Compétences',
+        'skills-lang-title': 'Langages de programmation',
+        'skills-ds-title': 'Data Science & Analyse',
+        'skills-web-title': 'Développement Web & Outils',
         'certificates-title': 'Certificats Obtenus',
         'contact-title': 'Contactez-moi',
         'label-name': 'Nom',
@@ -117,12 +99,7 @@ const translations = {
         'btn-text': 'Envoyer',
         'phone-label': 'Téléphone :',
         'rights': 'Tous droits réservés',
-        'notificationSuccess': 'Message envoyé avec succès !',
-        'skills-lang-title': 'Langages de programmation',
-        'skills-ds-title': 'Data Science & Analyse',
-        'skills-web-title': 'Développement Web & Outils',
-        'cert-arduino-title': 'Programmation Arduino & Électronique',
-        'cert-arduino-issuer': 'Arduino Education'
+        'notificationSuccess': 'Message envoyé avec succès !'
     },
     en: {
         'lang-text': 'FR',
@@ -145,13 +122,16 @@ const translations = {
         'exp0-desc': 'Participation in the "Company Program" entrepreneurial program by INJAZ AL MAGHRIB, developing skills in business management, teamwork and innovation.',
         'exp0-date': '2024',
         'exp1-title': 'Academic Projects',
-        'exp1-desc': 'Development of projects in data science, data analysis and machine learning as part of my training at ENSA Agadir.',
+        'exp1-desc': 'Development of projects in data science, data analysis and machine learning as part of my engineering program at ENSA Agadir.',
         'exp2-title': 'Continuous Learning',
         'exp2-desc': 'Self-training in programming, web development and emerging technologies to strengthen my technical skills.',
         'projects-title': 'Projects',
         'project1-title': 'Statistical Analysis with R',
         'project2-title': 'Study of Product Layout and Sales Performance Relationship',
         'skills-title': 'Skills',
+        'skills-lang-title': 'Programming Languages',
+        'skills-ds-title': 'Data Science & Analysis',
+        'skills-web-title': 'Web Development & Tools',
         'certificates-title': 'Certificates Earned',
         'contact-title': 'Contact Me',
         'label-name': 'Name',
@@ -160,62 +140,40 @@ const translations = {
         'btn-text': 'Send',
         'phone-label': 'Phone:',
         'rights': 'All rights reserved',
-        'notificationSuccess': 'Message sent successfully!',
-        'skills-lang-title': 'Programming Languages',
-        'skills-ds-title': 'Data Science & Analysis',
-        'skills-web-title': 'Web Development & Tools',
-        'cert-arduino-title': 'Arduino Programming & Electronics',
-        'cert-arduino-issuer': 'Arduino Education'
+        'notificationSuccess': 'Message sent successfully!'
     }
 };
 
 function toggleLanguage() {
     currentLang = currentLang === 'fr' ? 'en' : 'fr';
     const texts = translations[currentLang];
-    
     localStorage.setItem('preferredLanguage', currentLang);
-    
     for (let id in texts) {
         const element = document.getElementById(id);
-        if (element) {
-            element.textContent = texts[id];
-        }
+        if (element) element.textContent = texts[id];
     }
-    
     document.documentElement.lang = currentLang;
 }
 
 window.addEventListener('load', () => {
     const savedLang = localStorage.getItem('preferredLanguage');
-    if (savedLang && savedLang !== currentLang) {
-        toggleLanguage();
-    }
+    if (savedLang && savedLang !== currentLang) toggleLanguage();
 });
 
-// Smooth scroll for navigation links
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             const headerHeight = document.querySelector('header').offsetHeight;
-            const targetPosition = target.offsetTop - headerHeight - 20;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: target.offsetTop - headerHeight - 20, behavior: 'smooth' });
         }
     });
 });
 
-// Animation au scroll pour les sections
+// Animation au scroll
 function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -223,8 +181,7 @@ function initScrollAnimations() {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, observerOptions);
-
+    }, { threshold: 0.1 });
     document.querySelectorAll('section:not(.hero)').forEach((section, index) => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(30px)';
@@ -237,124 +194,74 @@ function initScrollAnimations() {
 function initNavHighlight() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
-
     const highlightNav = debounce(() => {
         let current = '';
         const scrollPosition = window.scrollY + 150;
-
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 current = section.getAttribute('id');
             }
         });
-
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
+            if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
         });
     }, 100);
-
     window.addEventListener('scroll', highlightNav);
 }
 
-// Lazy loading des images
-if ('loading' in HTMLImageElement.prototype) {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        img.loading = 'lazy';
-    });
-}
-
-// Bouton "Retour en haut"
+// Bouton retour en haut
 const createScrollToTopButton = () => {
     const button = document.createElement('button');
     button.innerHTML = '<i class="fas fa-arrow-up"></i>';
     button.className = 'scroll-to-top';
-    button.setAttribute('aria-label', 'Retour en haut');
-
-    button.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
+    button.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     document.body.appendChild(button);
-
     window.addEventListener('scroll', debounce(() => {
-        if (window.scrollY > 300) {
-            button.style.opacity = '1';
-            button.style.visibility = 'visible';
-        } else {
-            button.style.opacity = '0';
-            button.style.visibility = 'hidden';
-        }
+        button.style.opacity = window.scrollY > 300 ? '1' : '0';
+        button.style.visibility = window.scrollY > 300 ? 'visible' : 'hidden';
     }, 100));
 };
-
 createScrollToTopButton();
 
-// Console Easter Egg
-console.log('%c👋 Salut! Intéressé par le code?', 'color: #0077FF; font-size: 20px; font-weight: bold;');
-console.log('%cN\'hésitez pas à me contacter: omarbouaaliouat2005@gmail.com', 'color: #00E0FF; font-size: 14px;');
-
-// Gestion du formulaire de contact
+// Formulaire de contact
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
-    
     if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
             if (!name || !email || !message) {
                 alert(currentLang === 'fr' ? 'Veuillez remplir tous les champs.' : 'Please fill in all fields.');
                 return;
             }
-            
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert(currentLang === 'fr' ? 'Veuillez entrer une adresse email valide.' : 'Please enter a valid email address.');
                 return;
             }
-            
             const sendBtn = document.getElementById('send-btn');
             const originalBtnText = sendBtn.innerHTML;
-            
             sendBtn.disabled = true;
             sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>' + (currentLang === 'fr' ? 'Envoi...' : 'Sending...') + '</span>';
-            
             const formData = new FormData();
             formData.append('name', name);
             formData.append('email', email);
             formData.append('message', message);
-            
             try {
                 const response = await fetch('https://formspree.io/f/mpqodkjd', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    method: 'POST', body: formData, headers: { 'Accept': 'application/json' }
                 });
-                
                 if (response.ok) {
                     showNotification();
                     contactForm.reset();
-                } else {
-                    throw new Error('Erreur d\'envoi');
-                }
+                } else throw new Error('Erreur');
             } catch (error) {
-                const errorMsg = currentLang === 'fr' 
-                    ? 'Erreur lors de l\'envoi. Veuillez réessayer.' 
-                    : 'Error sending message. Please try again.';
-                alert(errorMsg);
-                console.error('Formspree Error:', error);
+                alert(currentLang === 'fr' ? 'Erreur lors de l\'envoi.' : 'Error sending message.');
             } finally {
                 sendBtn.disabled = false;
                 sendBtn.innerHTML = originalBtnText;
@@ -366,208 +273,64 @@ document.addEventListener('DOMContentLoaded', function() {
 function showNotification() {
     const notification = document.getElementById('successNotification');
     const notificationText = document.getElementById('notification-text');
-    
-    if (notificationText) {
-        notificationText.textContent = currentLang === 'fr' 
-            ? 'Message envoyé avec succès !' 
-            : 'Message sent successfully!';
-    }
-    
+    notificationText.textContent = currentLang === 'fr' ? 'Message envoyé avec succès !' : 'Message sent successfully!';
     notification.classList.add('show');
-    
-    setTimeout(function() {
-        closeNotification();
-    }, 5000);
+    setTimeout(() => closeNotification(), 5000);
 }
-
 function closeNotification() {
-    const notification = document.getElementById('successNotification');
-    if (notification) {
-        notification.classList.remove('show');
-    }
+    document.getElementById('successNotification')?.classList.remove('show');
 }
-// ========== GESTION DES CERTIFICATS ==========
 
-// Fonction pour ouvrir et visualiser un certificat
+// Gestion des certificats
 function viewCertificate(certificateFile) {
-    // Créer le modal s'il n'existe pas
     let modal = document.getElementById('certificateModal');
-    
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'certificateModal';
-        modal.className = 'certificate-modal';
-        modal.innerHTML = `
-            <div class="certificate-modal-content">
-                <button class="certificate-modal-close" onclick="closeCertificateModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div id="certificateViewer"></div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-    }
-    
+    if (!modal) createModal();
+    modal = document.getElementById('certificateModal');
     const viewer = document.getElementById('certificateViewer');
-    
-    // Détecter le type de fichier par l'extension
-    const fileExtension = certificateFile.split('.').pop().toLowerCase();
-    
-    if (fileExtension === 'pdf') {
-        viewer.innerHTML = `<embed src="${certificateFile}" type="application/pdf" width="100%" height="100%" style="min-height: 500px;">`;
-    } else if (fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'png' || fileExtension === 'gif') {
-        viewer.innerHTML = `<img src="${certificateFile}" alt="Certificat" style="width: 100%; height: auto; border-radius: 10px;">`;
-    } else {
-        viewer.innerHTML = `<iframe src="${certificateFile}" width="100%" height="100%" style="min-height: 500px; border: none;"></iframe>`;
-    }
-    
+    viewer.innerHTML = `<embed src="${certificateFile}" type="application/pdf" width="100%" height="100%" style="min-height: 500px;">`;
     modal.classList.add('show');
-    
-    // Fermer avec la touche Echap
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
-            closeCertificateModal();
-        }
-    });
 }
 
-// Fonction pour fermer le modal
 function closeCertificateModal() {
     const modal = document.getElementById('certificateModal');
     if (modal) {
         modal.classList.remove('show');
         const viewer = document.getElementById('certificateViewer');
-        if (viewer) {
-            viewer.innerHTML = '';
-        }
+        if (viewer) viewer.innerHTML = '';
     }
 }
 
-// Fonction pour télécharger un certificat
 function downloadCertificate(certificateFile) {
-    // Créer un lien de téléchargement temporaire
     const link = document.createElement('a');
     link.href = certificateFile;
-    link.download = certificateFile; // Le nom du fichier téléchargé
+    link.download = certificateFile;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
-    // Afficher une notification de téléchargement
-    showDownloadNotification();
 }
 
-// Fonction pour afficher la notification de téléchargement
-function showDownloadNotification() {
-    // Créer une notification temporaire
-    const notification = document.createElement('div');
-    notification.className = 'download-notification';
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fas fa-download"></i>
-            <span>Téléchargement démarré...</span>
-        </div>
-    `;
-    notification.style.cssText = `
-        position: fixed;
-        bottom: 100px;
-        right: 30px;
-        background: linear-gradient(135deg, #10b981, #059669);
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.75rem;
-        z-index: 10001;
-        animation: slideInRight 0.5s ease-out;
-        box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.5s ease-out';
-        setTimeout(() => {
-            notification.remove();
-        }, 500);
-    }, 3000);
-}
-
-// Animation pour la notification de téléchargement
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOutRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Alternative : Si les certificats sont des images
-// Vous pouvez aussi utiliser cette fonction pour les certificats en image
-function viewCertificateImage(imagePath) {
-    const modal = document.getElementById('certificateModal');
-    if (!modal) {
-        createModal();
-    }
-    const viewer = document.getElementById('certificateViewer');
-    viewer.innerHTML = `<img src="${imagePath}" alt="Certificat" style="width: 100%; height: auto; border-radius: 10px; max-height: 80vh; object-fit: contain;">`;
-    document.getElementById('certificateModal').classList.add('show');
-}
-
-// Fonction utilitaire pour créer le modal s'il n'existe pas
 function createModal() {
+    if (document.getElementById('certificateModal')) return;
     const modal = document.createElement('div');
     modal.id = 'certificateModal';
     modal.className = 'certificate-modal';
     modal.innerHTML = `
         <div class="certificate-modal-content">
-            <button class="certificate-modal-close" onclick="closeCertificateModal()">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="certificate-modal-close" onclick="closeCertificateModal()"><i class="fas fa-times"></i></button>
             <div id="certificateViewer"></div>
         </div>
     `;
     document.body.appendChild(modal);
-    
-    // Fermer en cliquant à l'extérieur
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeCertificateModal();
-        }
-    });
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeCertificateModal(); });
 }
 
-// Initialisation : créer le modal au chargement
-document.addEventListener('DOMContentLoaded', function() {
-    createModal();
-});
-// ============================================
-// MENU BURGER POUR MOBILE
-// ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
+// Menu burger mobile
+function initMobileMenu() {
     const menuBurger = document.getElementById('menuBurger');
     const mainNav = document.getElementById('mainNav');
     const body = document.body;
     
     if (menuBurger && mainNav) {
-        // Ouvrir/fermer le menu au clic sur le burger
         menuBurger.addEventListener('click', function(e) {
             e.stopPropagation();
             menuBurger.classList.toggle('active');
@@ -575,7 +338,6 @@ document.addEventListener('DOMContentLoaded', function() {
             body.classList.toggle('menu-open');
         });
         
-        // Fermer le menu quand on clique sur un lien
         const navLinks = mainNav.querySelectorAll('a');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -585,7 +347,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Fermer le menu quand on clique en dehors
         document.addEventListener('click', function(event) {
             if (mainNav.classList.contains('open') && 
                 !mainNav.contains(event.target) && 
@@ -596,9 +357,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
+}
 
-// Ajuster le padding-top du container selon la hauteur du header
+// Ajuster le padding du container
 function adjustContainerPadding() {
     const header = document.querySelector('header');
     const container = document.querySelector('.container');
@@ -608,6 +369,8 @@ function adjustContainerPadding() {
     }
 }
 
-// Exécuter au chargement et au redimensionnement
-window.addEventListener('load', adjustContainerPadding);
 window.addEventListener('resize', adjustContainerPadding);
+
+// Console Easter Egg
+console.log('%c👋 Salut! Intéressé par le code?', 'color: #0077FF; font-size: 20px; font-weight: bold;');
+console.log('%cN\'hésitez pas à me contacter: omarbouaaliouat2005@gmail.com', 'color: #00E0FF; font-size: 14px;');
