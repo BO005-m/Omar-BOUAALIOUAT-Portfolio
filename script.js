@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createModal();
     initMobileMenu();
     adjustContainerPadding();
+    applyProjectDescriptions(); // Appliquer les descriptions des projets
 });
 
 // Logo flip animation
@@ -58,6 +59,73 @@ function changeProfileImage() {
 
 // Système de traduction
 let currentLang = 'fr';
+
+// Descriptions des projets
+const projectDescriptions = {
+    fr: {
+        project1: [
+            "Importation et traitement de bases de données",
+            "Visualisation des données : Conception des graphes avancés (Histogrammes, Nuages de points, Boxplots)",
+            "Interprétation et reporting : Synthèses des résultats sous forme des indicateurs clés pour faciliter la prise de décision"
+        ],
+        project2: [
+            "Traitement de Données : Nettoyage et manipulation de bases de données transactionnelles avec Python (Pandas)",
+            "Analyse Statistique : Calcul des corrélations et analyse des tendances de vente par catégorie de produits avec R (tidyverse)",
+            "Visualisation : Conception de graphiques avancés et de cartes de chaleur (Heatmaps) avec Matplotlib pour faciliter la prise de décision"
+        ],
+        project3: [
+            "Technologies : FastAPI (Python), Next.js (React), JWT, Tailwind CSS, QR Codes",
+            "Architecture : Développement d'une application full-stack avec séparation Backend et Frontend",
+            "Innovation : Mise en place d'un système de génération et validation de billets via scan code QR (dynamique) pour limiter la vente illégale des billets, avec des fonctionnalités de revente sécurisée sur la plateforme"
+        ]
+    },
+    en: {
+        project1: [
+            "Database import and processing",
+            "Data visualization: Design of advanced graphs (Histograms, Scatter plots, Boxplots)",
+            "Interpretation and reporting: Summary of results as key indicators to facilitate decision-making"
+        ],
+        project2: [
+            "Data Processing: Cleaning and manipulation of transactional databases with Python (Pandas)",
+            "Statistical Analysis: Calculation of correlations and analysis of sales trends by product category with R (tidyverse)",
+            "Visualization: Design of advanced graphs and heatmaps with Matplotlib to facilitate decision-making"
+        ],
+        project3: [
+            "Technologies: FastAPI (Python), Next.js (React), JWT, Tailwind CSS, QR Codes",
+            "Architecture: Development of a full-stack application with Backend and Frontend separation",
+            "Innovation: Implementation of a ticket generation and validation system via dynamic QR code scanning to limit illegal ticket sales, with secure resale features on the platform"
+        ]
+    }
+};
+
+// Fonction pour appliquer les descriptions des projets
+function applyProjectDescriptions() {
+    const lang = currentLang;
+    const descriptions = projectDescriptions[lang];
+    
+    // Projet 1
+    const project1List = document.querySelector('#projects .project-item:first-child .project-list');
+    if (project1List && descriptions.project1) {
+        project1List.innerHTML = descriptions.project1.map(item => `<li>${item}</li>`).join('');
+    }
+    
+    // Projet 2
+    const projectItems = document.querySelectorAll('#projects .project-item');
+    if (projectItems.length >= 2) {
+        const project2List = projectItems[1].querySelector('.project-list');
+        if (project2List && descriptions.project2) {
+            project2List.innerHTML = descriptions.project2.map(item => `<li>${item}</li>`).join('');
+        }
+    }
+    
+    // Projet 3
+    if (projectItems.length >= 3) {
+        const project3List = projectItems[2].querySelector('.project-list');
+        if (project3List && descriptions.project3) {
+            project3List.innerHTML = descriptions.project3.map(item => `<li>${item}</li>`).join('');
+        }
+    }
+}
 
 const translations = {
     fr: {
@@ -87,10 +155,12 @@ const translations = {
         'projects-title': 'Projets',
         'project1-title': 'Analyse statistique avec R',
         'project2-title': 'Étude de la relation entre la disposition des produits et les performances des ventes',
+        'project3-title': 'TicketFlow - Gestion de billetterie événementielle',
         'skills-title': 'Compétences',
         'skills-lang-title': 'Langages de programmation',
         'skills-ds-title': 'Data Science & Analyse',
         'skills-web-title': 'Développement Web & Outils',
+        'skills-frameworks-title': 'Frameworks & Bibliothèques',
         'certificates-title': 'Certificats Obtenus',
         'contact-title': 'Contactez-moi',
         'label-name': 'Nom',
@@ -127,11 +197,13 @@ const translations = {
         'exp2-desc': 'Self-training in programming, web development and emerging technologies to strengthen my technical skills.',
         'projects-title': 'Projects',
         'project1-title': 'Statistical Analysis with R',
-        'project2-title': 'Study of Product Layout and Sales Performance Relationship',
+        'project2-title': 'Study of the relationship between product layout and sales performance',
+        'project3-title': 'TicketFlow - Event Ticketing Management',
         'skills-title': 'Skills',
         'skills-lang-title': 'Programming Languages',
         'skills-ds-title': 'Data Science & Analysis',
         'skills-web-title': 'Web Development & Tools',
+        'skills-frameworks-title': 'Frameworks & Libraries',
         'certificates-title': 'Certificates Earned',
         'contact-title': 'Contact Me',
         'label-name': 'Name',
@@ -148,10 +220,16 @@ function toggleLanguage() {
     currentLang = currentLang === 'fr' ? 'en' : 'fr';
     const texts = translations[currentLang];
     localStorage.setItem('preferredLanguage', currentLang);
+    
+    // Traduction des textes simples
     for (let id in texts) {
         const element = document.getElementById(id);
         if (element) element.textContent = texts[id];
     }
+    
+    // Traduction des descriptions des projets
+    applyProjectDescriptions();
+    
     document.documentElement.lang = currentLang;
 }
 

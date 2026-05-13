@@ -69,6 +69,7 @@ body {
 
 header {
     background: rgba(13, 17, 23, 0.95);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 1rem 5%;
     position: fixed;
@@ -177,11 +178,11 @@ nav a:hover, nav a.active {
     padding: 100px 20px 20px;
 }
 
-/* Hero - Version sans animation de bordure */
 .hero {
     text-align: center;
     padding: 4rem 3rem;
     background: rgba(13, 17, 23, 0.8);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     margin-bottom: 2rem;
@@ -288,6 +289,7 @@ nav a:hover, nav a.active {
 
 section {
     background: rgba(13, 17, 23, 0.6);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 2.5rem;
     margin-bottom: 2rem;
@@ -389,10 +391,48 @@ h2 i {
     color: #00E0FF;
 }
 
-/* ============================================
-   SKILLS - Version sans barres de progression
-   ============================================ */
+/* Project GitHub Buttons */
+.project-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
 
+.project-github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: linear-gradient(135deg, #1a1e23, #0D1117);
+    border: 2px solid #00E0FF;
+    border-radius: 25px;
+    color: #F5F7FA;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.project-github-btn i {
+    font-size: 0.9rem;
+    color: #00E0FF;
+    transition: all 0.3s ease;
+}
+
+.project-github-btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #0D1117, #1a1e23);
+    border-color: #0077FF;
+    box-shadow: 0 4px 15px rgba(0, 224, 255, 0.3);
+}
+
+.project-github-btn:hover i {
+    color: #0077FF;
+}
+
+/* Skills */
 .skills-category {
     margin-bottom: 2rem;
 }
@@ -457,10 +497,7 @@ h2 i {
     transform: scale(1.05);
 }
 
-/* ============================================
-   CERTIFICATS - 3 par ligne
-   ============================================ */
-
+/* Certificates */
 .certificates-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -555,39 +592,7 @@ h2 i {
     transform: translateY(-2px);
 }
 
-/* Tablette : 2 par ligne */
-@media (max-width: 900px) {
-    .certificates-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-}
-
-/* Mobile : 1 par ligne */
-@media (max-width: 600px) {
-    .certificates-grid {
-        grid-template-columns: 1fr;
-        gap: 0.8rem;
-    }
-    
-    .certificate-item {
-        padding: 0.8rem;
-    }
-    
-    .certificate-icon {
-        font-size: 1.2rem;
-        min-width: 35px;
-    }
-    
-    .certificate-content h3 {
-        font-size: 0.8rem;
-    }
-}
-
-/* ============================================
-   CONTACT
-   ============================================ */
-
+/* Contact */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -669,12 +674,10 @@ h2 i {
     cursor: not-allowed;
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
-
+/* Footer */
 footer {
     background: rgba(13, 17, 23, 0.8);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     text-align: center;
@@ -735,10 +738,7 @@ footer {
     opacity: 0.7;
 }
 
-/* ============================================
-   NOTIFICATIONS
-   ============================================ */
-
+/* Notifications */
 .success-notification, .error-notification {
     position: fixed;
     top: -100px;
@@ -784,10 +784,7 @@ footer {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* ============================================
-   SCROLL TO TOP
-   ============================================ */
-
+/* Scroll to top */
 .scroll-to-top {
     position: fixed;
     bottom: 30px;
@@ -810,10 +807,7 @@ footer {
     transform: translateY(-3px);
 }
 
-/* ============================================
-   MODAL CERTIFICATS
-   ============================================ */
-
+/* Modal certificates */
 .certificate-modal {
     display: none;
     position: fixed;
@@ -825,6 +819,7 @@ footer {
     z-index: 10000;
     justify-content: center;
     align-items: center;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
 }
 
@@ -867,10 +862,7 @@ footer {
     transform: scale(1.05);
 }
 
-/* ============================================
-   MENU BURGER MOBILE
-   ============================================ */
-
+/* Menu burger mobile */
 .menu-burger {
     display: none;
     flex-direction: column;
@@ -904,10 +896,7 @@ footer {
     transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-
+/* Responsive */
 @media (max-width: 768px) {
     .menu-burger {
         display: flex;
@@ -930,6 +919,7 @@ footer {
         max-width: 260px;
         height: 100vh;
         background: rgba(13, 17, 23, 0.98);
+        -webkit-backdrop-filter: blur(15px);
         backdrop-filter: blur(15px);
         padding: 60px 20px 20px;
         transition: right 0.3s ease;
@@ -1025,6 +1015,15 @@ footer {
         height: 45px;
     }
     
+    .project-actions {
+        justify-content: center;
+    }
+    
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -1038,6 +1037,13 @@ footer {
     .logo-box {
         width: 40px;
         height: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .certificates-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
     }
 }
 
@@ -1073,10 +1079,7 @@ footer {
     }
 }
 
-/* ============================================
-   ACCESSIBILITE
-   ============================================ */
-
+/* Accessibility */
 *:focus-visible {
     outline: 3px solid #00E0FF;
     outline-offset: 3px;
