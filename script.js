@@ -169,7 +169,12 @@ const translations = {
         'btn-text': 'Envoyer',
         'phone-label': 'Téléphone :',
         'rights': 'Tous droits réservés',
-        'notificationSuccess': 'Message envoyé avec succès !'
+        'notificationSuccess': 'Message envoyé avec succès !',
+        'exp-copag-title': 'Stage - COPAG : Développement d\'un système d\'aide à la décision',
+        'exp-copag-li1': 'Développement d\'un pipeline ETL pour l\'intégration et le traitement des données au sein d\'un Data Lake.',
+        'exp-copag-li2': 'Conception et implémentation d\'un Data Warehouse pour structurer les données.',
+        'exp-copag-li3': 'Conception de modèles de données et création de Dashboards interactifs Power BI pour le suivi des indicateurs clés de performances.',
+        'exp-copag-date': 'Août 2026'
     },
     en: {
         'lang-text': 'FR',
@@ -212,7 +217,12 @@ const translations = {
         'btn-text': 'Send',
         'phone-label': 'Phone:',
         'rights': 'All rights reserved',
-        'notificationSuccess': 'Message sent successfully!'
+        'notificationSuccess': 'Message sent successfully!',
+        'exp-copag-title': 'Internship - COPAG: Development of a decision support system',
+        'exp-copag-li1': 'Development of an ETL pipeline for data integration and processing within a Data Lake.',
+        'exp-copag-li2': 'Design and implementation of a Data Warehouse to structure data.',
+        'exp-copag-li3': 'Data model design and creation of interactive Power BI dashboards for tracking key performance indicators.',
+        'exp-copag-date': 'August 2026'
     }
 };
 

@@ -1093,3 +1093,8 @@ footer {
         scroll-behavior: auto !important;
     }
 }
+
+.experience-item .project-list {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
